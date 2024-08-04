@@ -1,4 +1,4 @@
-import { Box, Button, Spinner, Text, useToast } from "@chakra-ui/react";
+import { Box, Button, Spinner, Textarea, useToast } from "@chakra-ui/react";
 import { useState } from "react";
 import { executeCode } from "../api";
 
@@ -13,13 +13,15 @@ const Output = ({ editorRef, language }: Props) => {
     const [output, setOutput] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
     const [isError, setIsError] = useState(false)
+    const [input, setInput] = useState("")
 
     const runCode = async (e: any) => {
         e.preventDefault();
+
         const sourceCode = editorRef.current.getValue();
         try {
             setIsLoading(true);
-            const data = await executeCode("c++", sourceCode);
+            const data = await executeCode(language, sourceCode, input);
             setOutput(data.run.output);
             data.run.stderr ? setIsError(true) : setIsError(false);
         } catch (error: any) {
@@ -46,12 +48,28 @@ const Output = ({ editorRef, language }: Props) => {
                 {isLoading ? <Spinner size="sm" /> : "Run"}
             </Button>
             <Box
-                height="75vh"
-                p={2}
-                color = {isError ? "red.400" : ""}
+                height="35vh"
                 border="1px solid"
                 borderRadius={4}
-                borderColor={ isError ? "red.500" : "#333"}
+            >
+                <Textarea
+                    width="100%"
+                    height="100%"
+                    border="none"
+                    value={input}
+                    onChange={(e) => setInput(e.target.value)}
+                    outline="none"
+                    resize="none"
+                    _focus={{ boxShadow: "none" }}
+                />
+            </Box>
+            <Box
+                height="35vh"
+                p={2}
+                color={isError ? "red.400" : ""}
+                border="1px solid"
+                borderRadius={4}
+                borderColor={isError ? "red.500" : "#333"}
             >
                 {output ? output : `Click "RUN" to see the output here.`}
             </Box>

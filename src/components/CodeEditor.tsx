@@ -1,5 +1,5 @@
 import { Editor } from "@monaco-editor/react";
-import React, { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import LanguageSelector from "./LanguageSelector";
 import { Box, HStack } from "@chakra-ui/react";
 import { Language, STARTER_CODE } from "../constants";
@@ -8,7 +8,7 @@ import Output from "./Output";
 const CodeEditor = () => {
     const [value, setValue] = useState("");
     const editorRef = useRef();
-    const [language, setLanguage] = useState<Language>("CPP");
+    const [language, setLanguage] = useState<Language>("cpp");
 
     const onMount = (editor: any) => {
         editorRef.current = editor;
@@ -21,8 +21,8 @@ const CodeEditor = () => {
     };
 
     return (
-        <Box>
-            <HStack spacing={4}>
+        <Box >
+            <HStack spacing={4} >
                 <Box width="50%">
                     <LanguageSelector
                         language={language}
@@ -30,7 +30,7 @@ const CodeEditor = () => {
                     />
                     <Editor
                         height="75vh"
-                        language={language.toLowerCase()}
+                        language={language}
                         defaultValue={STARTER_CODE[language] as string}
                         theme="vs-dark"
                         value={value}

@@ -1,37 +1,50 @@
-export const LANGUAGE_VERSIONS: Record<Language, string> = {
-    Javascript: "1.2.2",
-    Typescript: "9393",
-    Python: "933",
-    Java: "9393",
-    CPP: "9393",
-    CSharp: "939",
-    Ruby: "123",
-    Go: "00",
-    PHP: "939",
-    Swift: "9338",
+export const LANGUAGE_VERSIONS: Record<string, string> = {
+    python: "3.10.0",
+    java: "15.0.2",
+    "cpp": "10.2.0",
+    javascript: "18.15.0",
+    typescript: "5.0.3",
+    csharp: "6.12.0",
+    c: "10.0.0",
+    ruby: "3.0.1",
+    go: "1.16.2",
+    php: "8.2.3",
+    swift: "5.3.3",
+    rust: "1.68.2",
+    kotlin: "1.8.20"
 };
 
 export type Language =
-    | "Javascript"
-    | "Typescript"
-    | "Python"
-    | "Java"
-    | "CPP"
-    | "CSharp"
-    | "Ruby"
-    | "Go"
-    | "PHP"
-    | "Swift";
+    | "javascript"
+    | "typescript"
+    | "python"
+    | "java"
+    | "cpp"
+    | "csharp"
+    | "ruby"
+    | "go"
+    | "php"
+    | "swift"
+    | "rust"
+    | "kotlin"
+    | "c";
 
-export const STARTER_CODE: Record<Language, string> = {
-    Javascript: "console.log('Hello Coders!');",
-    Typescript: "console.log('Hello Coders!');",
-    Python: "print('Hello Coders!')",
-    Java: "public class Main { public static void main(String[] args) { System.out.println('Hello Coders!'); } }",
-    CPP: "#include <iostream>\nusing namespace std;\n\nint main() \n{ \n\tcout << \"Hello Coders!\" << endl; \n\treturn 0; \n}",
-    CSharp: "using System;\nclass Program { static void Main() { Console.WriteLine('Hello Coders!'); } }",
-    Ruby: "puts 'Hello Coders!'",
-    Go: "package main\nimport 'fmt'\nfunc main() { fmt.Println('Hello Coders!') }",
-    PHP: "<?php echo 'Hello Coders!'; ?>",
-    Swift: "import Foundation\nprint('Hello Coders!')",
+export const STARTER_CODE: Record<string, string> = {
+    javascript: "console.log('Hello Coders!');",
+    typescript: "console.log('Hello Coders!');",
+    python: "print('Hello Coders!')",
+    java: `public class Main { 
+    public static void main(String[] args) { 
+        System.out.println("Hello Coders!"); 
+    } 
+}`,
+    cpp: `#include <iostream>\nusing namespace std;\n\nint main() \n{ \n\tcout << "Hello Coders!" << endl; \n\treturn 0; \n}`,
+    csharp: `using System;\nclass Program { \n\tstatic void Main() { \n\t\tConsole.WriteLine("Hello Coders!"); \n\t} \n}`,
+    ruby: "puts 'Hello Coders!'",
+    go: `package main\nimport "fmt"\nfunc main() { \n\tfmt.Println("Hello Coders!") \n}`,
+    php: `<?php \necho 'Hello Coders!'; \n?>`,
+    swift: `import Foundation\nprint("Hello Coders!")`,
+    kotlin: `fun main() {\n\tprintln("Hello Coders!")\n}`,
+    c: `#include <stdio.h>\n\nint main() {\n\tprintf("Hello Coders!\\n");\n\treturn 0;\n}`,
+    rust: `fn main() {\n\tprintln!("Hello Coders!");\n}`,
 };
