@@ -48,3 +48,41 @@ export const STARTER_CODE: Record<string, string> = {
     c: `#include <stdio.h>\n\nint main() {\n\tprintf("Hello Coders!\\n");\n\treturn 0;\n}`,
     rust: `fn main() {\n\tprintln!("Hello Coders!");\n}`,
 };
+
+export const question = {
+    name: `GCD-sequence`,
+    description: `
+GCD (Greatest Common Divisor) of two integers x and y is the maximum integer z by which both x and y are divisible. For example, GCD(36,48)=12, GCD(5,10)=5, and GCD(7,11)=1.
+
+Kristina has an array a consisting of exactly n positive integers. She wants to count the GCD of each neighbouring pair of numbers to get a new array b, called GCD-sequence.
+
+So, the elements of the GCD-sequence b will be calculated using the formula bi=GCD(ai,ai+1) for 1≤i≤n−1.
+
+Determine whether it is possible to remove exactly one number from the array a so that the GCD sequence b is non-decreasing (i.e., bi≤bi+1 is always true).
+
+For example, let Khristina had an array a = [20,6,12,3,48,36]. If she removes a4=3 from it and counts the GCD-sequence of b, she gets:
+b1=GCD(20,6)=2
+b2=GCD(6,12)=6
+b3=GCD(12,48)=12
+b4=GCD(48,36)=12
+The resulting GCD sequence b = [2,6,12,12] is non-decreasing because b1≤b2≤b3≤b4.
+
+Input
+The first line of input data contains a single number t (1≤t≤104) — he number of test cases in the test.
+
+This is followed by the descriptions of the test cases.
+
+The first line of each test case contains a single integer n (3≤n≤2⋅105) — the number of elements in the array a.
+
+The second line of each test case contains exactly n integers ai (1≤ai≤109) — the elements of array a.
+
+It is guaranteed that the sum of n over all test case does not exceed 2⋅105.
+
+Output
+For each test case, output a single line:
+
+"YES" if you can remove exactly one number from the array a so that the GCD-sequence of b is non-decreasing;
+"NO" otherwise.
+You can output the answer in any case (for example, the strings "yEs", "yes", "Yes", and "YES" will all be recognized as a positive answer).
+    `,
+};

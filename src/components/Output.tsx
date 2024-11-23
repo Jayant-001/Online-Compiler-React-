@@ -1,78 +1,71 @@
-import { Box, Button, Spinner, Textarea, useToast } from "@chakra-ui/react";
-import { useState } from "react";
-import { executeCode } from "../api";
+import { Box, Textarea } from "@chakra-ui/react";
+import Split from "react-split";
 
 type Props = {
-    // editorRef: React.MutableRefObject<HTMLInputElement>,
-    editorRef: any;
-    language: string;
+    output: any,
+    input: any,
+    setInput: any,
+    isError: any
 };
 
-const Output = ({ editorRef, language }: Props) => {
-    const toast = useToast();
-    const [output, setOutput] = useState(null);
-    const [isLoading, setIsLoading] = useState(false);
-    const [isError, setIsError] = useState(false)
-    const [input, setInput] = useState("")
+const Output = ({ output, input, setInput, isError }: Props) => {
+    // const [isLoading, setIsLoading] = useState(false);
+    
+    // const [input, setInput] = useState("")
 
-    const runCode = async (e: any) => {
-        e.preventDefault();
+    // const runCode = async (e: any) => {
+    //     e.preventDefault();
 
-        const sourceCode = editorRef.current.getValue();
-        try {
-            setIsLoading(true);
-            const data = await executeCode(language, sourceCode, input);
-            setOutput(data.run.output);
-            data.run.stderr ? setIsError(true) : setIsError(false);
-        } catch (error: any) {
-            console.log(error);
-            toast({
-                title: "An error occurred.",
-                description: error.response.data.message || "Unable to run the code",
-                status: "error",
-                duration: 6000,
-            });
-        } finally {
-            setIsLoading(false);
-        }
-    };
+    //     const sourceCode = editorRef.current.getValue();
+    //     try {
+    //         setIsLoading(true);
+    //         const data = await executeCode(language, sourceCode, input);
+    //         setOutput(data.run.output);
+    //         data.run.stderr ? setIsError(true) : setIsError(false);
+    //     } catch (error: any) {
+    //         console.log(error);
+    //         toast({
+    //             title: "An error occurred.",
+    //             description: error.response.data.message || "Unable to run the code",
+    //             status: "error",
+    //             duration: 6000,
+    //         });
+    //     } finally {
+    //         setIsLoading(false);
+    //     }
+    // };
 
     return (
-        <Box w="50%">
-            <Button
-                onClick={runCode}
-                variant="outline"
-                colorScheme="green"
-                mb={4}
-            >
-                {isLoading ? <Spinner size="sm" /> : "Run"}
-            </Button>
-            <Box
-                height="35vh"
-                border="1px solid"
-                borderRadius={4}
-            >
-                <Textarea
-                    width="100%"
-                    height="100%"
-                    border="none"
-                    value={input}
-                    onChange={(e) => setInput(e.target.value)}
-                    outline="none"
-                    resize="none"
-                    _focus={{ boxShadow: "none" }}
-                />
-            </Box>
-            <Box
-                height="35vh"
-                p={2}
-                color={isError ? "red.400" : ""}
-                border="1px solid"
-                borderRadius={4}
-                borderColor={isError ? "red.500" : "#333"}
-            >
-                {output ? output : `Click "RUN" to see the output here.`}
-            </Box>
+        <Box border="1px" borderColor="red.500" height="75vh" width="50%">
+            <Split direction="vertical" className="border-5 border h-full border-blue-600">
+                <Box border="1px solid" borderRadius={4}>
+                    <Textarea
+                        width="100%"
+                        height="100%"
+                        border="none"
+                        value={input}
+                        placeholder="Inputs will go here"
+                        onChange={(e) => setInput(e.target.value)}
+                        outline="none"
+                        resize="none"
+                        _focus={{ boxShadow: "none" }}
+                    />
+                </Box>
+                <Box
+                    height="35vh"
+                    p={2}
+                    color={isError ? "red.400" : ""}
+                    border="1px solid"
+                    borderRadius={4}
+                    borderColor={isError ? "red.500" : "#333"}
+                >
+                    <pre>
+                        {output
+                            ? output
+                            : `Click "RUN" to see the output here.`}
+                    </pre>
+                </Box>
+            </Split>
         </Box>
     );
 };

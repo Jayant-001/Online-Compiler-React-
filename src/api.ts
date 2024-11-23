@@ -11,7 +11,7 @@ export const executeCode = async (language: string, sourceCode: string, input: s
     const { data } = await API.post("/execute", {
         language: language,
         version: LANGUAGE_VERSIONS[language],
-        stdin: input,
+        stdin: input, 
         files: [
             {
                 content: sourceCode,
